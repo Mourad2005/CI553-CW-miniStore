@@ -7,7 +7,7 @@ package debug;
  */
 public class DEBUG
 {
-  private static boolean debug    = false;
+  private static boolean debug    = true;
   private static boolean oldState = false;
 
   /**
@@ -80,6 +80,7 @@ public class DEBUG
       error( "Assert - " + fmt, params );
     }
   }
+
 
   /**
    * Display a fatal error message, then exit

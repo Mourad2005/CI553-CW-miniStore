@@ -39,7 +39,9 @@ public class CashierClient
     
     CashierModel      model = new CashierModel(mf);
     CashierView       view  = new CashierView( window, mf, 0, 0 );
-    CashierController cont  = new CashierController( model, view );
+    CashierController cont = new CashierController(model, view);
+
+
     view.setController( cont );
 
     model.addObserver( view );       // Add observer to the model

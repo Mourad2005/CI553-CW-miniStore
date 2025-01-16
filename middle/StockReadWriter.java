@@ -3,37 +3,35 @@ package middle;
 import catalogue.Product;
 
 /**
-  * Interface for read/write access to the stock list.
-  * @author  Mike Smith University of Brighton
-  * @version 2.0
-  */
- 
-public interface StockReadWriter extends StockReader
-{
- /**
-   * Customer buys stock,
-   * stock level is thus decremented by amount bought.
-   * @param pNum Product number
-   * @param amount Quantity of product
-   * @return StockNumber, Description, Price, Quantity
-   * @throws middle.StockException if issue
-   */
-  boolean buyStock(String pNum, int amount) throws StockException;
+ * Interface for stock read/write operations
+ */
+public interface StockReadWriter extends StockReader {
+    /**
+     * Add stock for a product
+     * 
+     * @param productNum Product number
+     * @param amount     Amount of stock to add
+     * @throws StockException if there is an issue
+     */
+    void addStock(String productNum, int amount) throws StockException;
 
-  /**
-   * Adds stock (Restocks) to store.
-   * @param pNum Product number
-   * @param amount Quantity of product
-   * @throws middle.StockException if issue
-   */
-  void addStock(String pNum, int amount) throws StockException;
-  
-  /**
-   * Modifies Stock details for a given product number.
-   * Information modified: Description, Price
-   * @param detail Replace with this version of product
-   * @throws middle.StockException if issue
-   */
-  void modifyStock(Product detail) throws StockException;
+    /**
+     * Buy stock for a product
+     * 
+     * @param productNum Product number
+     * @param amount     Amount of stock to buy
+     * @return true if successful, false otherwise
+     * @throws StockException if there is an issue
+     */
+    boolean buyStock(String productNum, int amount) throws StockException;
 
+    /**
+     * Modify stock details
+     * 
+     * @param detail Product details to modify
+     * @throws StockException if there is an issue
+     */
+    void modifyStock(Product detail) throws StockException;
 }
+
+

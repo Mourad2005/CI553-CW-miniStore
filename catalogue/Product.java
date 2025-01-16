@@ -1,61 +1,89 @@
 package catalogue;
 
-import java.io.Serializable;
+public class Product {
+    private int productNum;       // Product number
+    private String description;   // Product description
+    private double price;         // Product price
+    private int quantity;         // Product quantity
 
-/**
- * Used to hold the following information about
- * a product: Product number, Description, Price, Stock level.
- * @author  Mike Smith University of Brighton
- * @version 2.0
- */
+    /**
+     * Constructor for Product (int productNum)
+     * @param productNum Product number
+     * @param description Product description
+     * @param price Product price
+     * @param quantity Product quantity
+     */
+    public Product(int productNum, String description, double price, int quantity) {
+        this.productNum = productNum;
+        this.description = description;
+        this.price = price;
+        this.quantity = quantity;
+    }
 
-public class Product implements Serializable
-{
-  private static final long serialVersionUID = 20092506;
-  private String theProductNum;       // Product number
-  private String theDescription;      // Description of product
-  private double thePrice;            // Price of product
-  private int    theQuantity;         // Quantity involved
+    /**
+     * Constructor for Product (String productNum)
+     * @param productNum Product number (String)
+     * @param description Product description
+     * @param price Product price
+     * @param quantity Product quantity
+     */
+    public Product(String productNum, String description, double price, int quantity) {
+        this.productNum = Integer.parseInt(productNum); // Convert String to int
+        this.description = description;
+        this.price = price;
+        this.quantity = quantity;
+    }
 
-  /**
-   * Construct a product details
-   * @param aProductNum Product number
-   * @param aDescription Description of product
-   * @param aPrice The price of the product
-   * @param aQuantity The Quantity of the product involved
-   */
-  public Product( String aProductNum, String aDescription,
-                  double aPrice, int aQuantity )
-  {
-    theProductNum  = aProductNum;     // Product number
-    theDescription = aDescription;    // Description of product
-    thePrice       = aPrice;          // Price of product
-    theQuantity    = aQuantity;       // Quantity involved
-  }
-  
-  public String getProductNum()  { return theProductNum; }
-  public String getDescription() { return theDescription; }
-  public double getPrice()       { return thePrice; }
-  public int    getQuantity()    { return theQuantity; }
-  
-  public void setProductNum( String aProductNum )
-  { 
-    theProductNum = aProductNum;
-  }
-  
-  public void setDescription( String aDescription )
-  { 
-    theDescription = aDescription;
-  }
-  
-  public void setPrice( double aPrice )
-  { 
-    thePrice = aPrice;
-  }
-  
-  public void setQuantity( int aQuantity )
-  { 
-    theQuantity = aQuantity;
-  }
+    public int getProductNum() {
+        return productNum;
+    }
 
+    public void setProductNum(int productNum) {
+        this.productNum = productNum;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Product product = (Product) obj;
+        return this.productNum == product.productNum;
+    }
+
+    @Override
+    public int hashCode() {
+        return Integer.hashCode(productNum);
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Product[Num=%d, Desc=%s, Price=%.2f, Qty=%d]",
+                             productNum, description, price, quantity);
+    }
 }
+
+

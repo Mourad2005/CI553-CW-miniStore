@@ -1,48 +1,68 @@
 package clients.cashier;
 
+import debug.DEBUG;
 
 /**
- * The Cashier Controller
+ * Controller for the Cashier client
  */
+public class CashierController {
+    private CashierModel model;      // The underlying model
+    private CashierView view;        // The GUI view
 
-public class CashierController
-{
-  private CashierModel model = null;
-  private CashierView  view  = null;
+    /**
+     * Construct the controller for the cashier client using an existing model and view
+     * 
+     * @param model The existing model
+     * @param view  The existing view
+     */
+    public CashierController(CashierModel model, CashierView view) {
+        this.model = model;
+        this.view = view;
+        view.setController(this);         // Set controller in view
+        model.addObserver(view);          // View observes model
+        model.askForUpdate();             // Initialize view
+    }
 
-  /**
-   * Constructor
-   * @param model The model 
-   * @param view  The view from which the interaction came
-   */
-  public CashierController( CashierModel model, CashierView view )
-  {
-    this.view  = view;
-    this.model = model;
-  }
+    /**
+     * Check if a product is in stock
+     * 
+     * @param productNum The product number to check
+     */
+    public void doCheck(String productNum) {
+        DEBUG.trace("CashierController: doCheck(%s)", productNum);
+        model.doCheck(productNum);
+    }
 
-  /**
-   * Check interaction from view
-   * @param pn The product number to be checked
-   */
-  public void doCheck( String pn )
-  {
-    model.doCheck(pn);
-  }
+    /**
+     * Buy the checked product with the specified quantity
+     * 
+     * @param quantity The quantity to purchase
+     */
+    public void doBuy(int quantity) {
+        DEBUG.trace("CashierController: doBuy(%d)", quantity);
+        model.doBuy(quantity);
+    }
 
-   /**
-   * Buy interaction from view
-   */
-  public void doBuy()
-  {
-    model.doBuy();
-  }
-  
-   /**
-   * Bought interaction from view
-   */
-  public void doBought()
-  {
-    model.doBought();
-  }
+    /**
+     * Complete the purchase and process the basket
+     */
+    public void doBought() {
+        DEBUG.trace("CashierController: doBought()");
+        model.doBought();
+    }
+
+    /**
+     * Clear the basket
+     */
+    public void doClearBasket() {
+        DEBUG.trace("CashierController: doClearBasket()");
+        model.doClearBasket();
+    }
 }
+
+
+
+
+
+
+
